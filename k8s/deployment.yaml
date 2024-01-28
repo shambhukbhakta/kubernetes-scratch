@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: votingapp-deployment
+  labels:
+    app: votingapp
+    type: front-end
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end
+  template:
+    metadata:
+      name: votingapp-prod
+      labels:
+        app: votingapp
+        type: front-end
+    spec:
+      containers:
+        - name: votingapp
+          image: kubernetes-scratch/voting-app
+          ports:
+            - containerPort: 80
